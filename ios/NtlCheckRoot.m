@@ -14,8 +14,8 @@ RCT_EXPORT_METHOD(checkRootJail:(RCTPromiseResolveBlock)resolve
     if(TARGET_IPHONE_SIMULATOR){
         resolve(@NO);
     }
-    UIDevice *currentDevice = [UIDevice currentDevice];
-    resolve(@YES);
+    // UIDevice *currentDevice = [UIDevice currentDevice];
+    // resolve(@YES);
 }
 
 
