@@ -12,7 +12,7 @@ RCT_EXPORT_METHOD(checkRootJail:(RCTPromiseResolveBlock)resolve
                  reject:(RCTPromiseRejectBlock)reject)
 {
     if(TARGET_IPHONE_SIMULATOR){
-        resolve(@NO);
+        resolve(@YES);
     }
     // UIDevice *currentDevice = [UIDevice currentDevice];
     // resolve(@YES);
