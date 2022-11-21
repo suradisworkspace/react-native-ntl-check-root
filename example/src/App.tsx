@@ -1,18 +1,24 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-ntl-check-root';
+import { StyleSheet, View, Text, Alert } from 'react-native';
+import { checkRootJail } from 'react-native-ntl-check-root';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [checkRootRes, setCheckRootRes] = React.useState<boolean | undefined>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    init();
   }, []);
+
+  const init = async () => {
+    const jailRes = await checkRootJail();
+    setCheckRootRes(jailRes);
+    Alert.alert('jail res', `${jailRes}`);
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>checkRootRes: {checkRootRes}</Text>
     </View>
   );
 }

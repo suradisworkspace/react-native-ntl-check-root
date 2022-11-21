@@ -1,19 +1,23 @@
 #import "NtlCheckRoot.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 
 @implementation NtlCheckRoot
 RCT_EXPORT_MODULE()
 
 // Example method
 // See // https://reactnative.dev/docs/native-modules-ios
-RCT_REMAP_METHOD(multiply,
-                 multiplyWithA:(double)a withB:(double)b
-                 withResolver:(RCTPromiseResolveBlock)resolve
-                 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(checkRootJail:(RCTPromiseResolveBlock)resolve
+                 reject:(RCTPromiseRejectBlock)reject)
 {
-    NSNumber *result = @(a * b);
-
-    resolve(result);
+    if(TARGET_IPHONE_SIMULATOR){
+        resolve(@NO);
+    }
+    UIDevice *currentDevice = [UIDevice currentDevice];
+    resolve(@YES);
 }
+
 
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED

@@ -24,6 +24,6 @@ const NtlCheckRoot = NtlCheckRootModule
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return NtlCheckRoot.multiply(a, b);
+export function checkRootJail(): Promise<boolean> {
+  return NtlCheckRoot.checkRootJail();
 }
