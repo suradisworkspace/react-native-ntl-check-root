@@ -28,6 +28,6 @@ export function checkRootJail(): Promise<boolean> {
   return NtlCheckRoot.checkRootJail();
 }
 
-export function multiply(): Promise<number> {
-  return NtlCheckRoot.multiply();
+export function multiply(a: number, b: number): Promise<number> {
+  return NtlCheckRoot.multiply(a, b);
 }
