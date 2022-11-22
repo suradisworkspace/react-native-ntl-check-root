@@ -15,7 +15,7 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   // See https://reactnative.dev/docs/native-modules-android
   @ReactMethod
   override fun multiply(a: Double, b: Double, promise: Promise) {
-    return promise.resolve(a * b)
+    promise.resolve(a * b)
   }
 
   companion object {
