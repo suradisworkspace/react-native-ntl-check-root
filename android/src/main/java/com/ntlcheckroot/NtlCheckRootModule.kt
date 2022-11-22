@@ -12,7 +12,7 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   }
 
   @ReactMethod
-  fun checkRootJail(promise: Promise) {
+  override fun checkRootJail(promise: Promise) {
     val result = true
     promise.resolve(result)
   }
