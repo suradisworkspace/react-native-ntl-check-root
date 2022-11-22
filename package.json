@@ -152,5 +152,13 @@
         }
       ]
     ]
+  },
+  "codegenConfig": {
+    "name": "NtlCheckRootSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.ntlcheckroot"
+    }
   }
 }
