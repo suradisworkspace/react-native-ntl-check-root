@@ -6,23 +6,84 @@
 @implementation NtlCheckRoot
 RCT_EXPORT_MODULE()
 
+static BOOL hasCydiaInstalled()
+{
+    BOOL canOpenScheme = NO;
+    
+    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://"]]){
+        canOpenScheme = YES;
+    }
+    return canOpenScheme;
+}
+
+static BOOL checkSuspeciousApps()
+{
+    NSArray *suspiciousApps = @[ @"/Applications/Cydia.app",
+                                 @"/Applications/blackra1n.app",
+                                 @"/Applications/FakeCarrier.app",
+                                 @"/Applications/Icy.app",
+                                 @"/Applications/IntelliScreen.app",
+                                 @"/Applications/MxTube.app",
+                                 @"/Applications/RockApp.app",
+                                 @"/Applications/SBSettings.app",
+                                 @"/Applications/WinterBoard.app" ];
+    for(NSString * appPath in suspiciousApps) {
+        if([[NSFileManager defaultManager] fileExistsAtPath: appPath]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
+static BOOL checkSuspeciousFiles()
+{
+    NSArray *suspeciousFiles = @[ @"/Library/MobileSubstrate/DynamicLibraries/LiveClock.plist",
+                                  @"/Library/MobileSubstrate/DynamicLibraries/Veency.plist",
+                                  @"/private/var/lib/apt",
+                                  @"/private/var/lib/apt/",
+                                  @"/private/var/lib/cydia",
+                                  @"/private/var/mobile/Library/SBSettings/Themes",
+                                  @"/private/var/stash",
+                                  @"/private/var/tmp/cydia.log",
+                                  @"/System/Library/LaunchDaemons/com.ikey.bbot.plist",
+                                  @"/System/Library/LaunchDaemons/com.saurik.Cydia.Startup.plist",
+                                  @"/usr/bin/sshd",
+                                  @"/usr/libexec/sftp-server",
+                                  @"/usr/sbin/sshd",
+                                  @"/etc/apt",
+                                  @"/bin/bash",
+                                  @"/Library/MobileSubstrate/MobileSubstrate.dylib" ];
+    for(NSString * filePath in suspeciousFiles) {
+        if([[NSFileManager defaultManager] fileExistsAtPath: filePath]){
+            return YES;
+        }
+    }
+    return NO;
+}
+
 // Example method
 // See // https://reactnative.dev/docs/native-modules-ios
 RCT_EXPORT_METHOD(checkRootJail:(RCTPromiseResolveBlock)resolve
-                 reject:(RCTPromiseRejectBlock)reject)
+                  reject:(RCTPromiseRejectBlock)reject)
 {
     if(TARGET_IPHONE_SIMULATOR){
         resolve(@YES);
+    } else if(hasCydiaInstalled()) {
+        resolve(@YES);
+    } else if(checkSuspeciousApps()) {
+        resolve(@YES);
+    } else if(checkSuspeciousFiles()){
+        resolve(@YES);
+    } else {
+        resolve(@NO);
     }
-    // UIDevice *currentDevice = [UIDevice currentDevice];
-    // resolve(@YES);
 }
 
 
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
+(const facebook::react::ObjCTurboModule::InitParams &)params
 {
     return std::make_shared<facebook::react::NativeNtlCheckRootSpecJSI>(params);
 }
