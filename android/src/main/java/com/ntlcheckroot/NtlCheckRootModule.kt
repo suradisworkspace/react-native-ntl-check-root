@@ -16,7 +16,6 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   @ReactMethod
   override fun multiply(a: Double, b: Double, promise: Promise) {
     promise.resolve(a * b)
-    Log.d("multiply called on android!!")
   }
 
   companion object {
