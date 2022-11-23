@@ -14,7 +14,7 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
-    RootBeer rootBeer = new RootBeer(context)
+    var rootBeer = new RootBeer(context)
     promise.resolve(rootBeer.isRooted())
   }
 
