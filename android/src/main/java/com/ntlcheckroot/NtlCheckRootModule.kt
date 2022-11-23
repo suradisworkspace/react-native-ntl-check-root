@@ -3,6 +3,7 @@ package com.ntlcheckroot
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
+import rootbeer.RootBeer
 
 class NtlCheckRootModule internal constructor(context: ReactApplicationContext) :
   NtlCheckRootSpec(context) {
@@ -13,8 +14,8 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
-    val result = true
-    promise.resolve(result)
+    RootBeer rootBeer = new RootBeer(context)
+    promise.resolve(rootBeer.isRooted())
   }
 
   companion object {
