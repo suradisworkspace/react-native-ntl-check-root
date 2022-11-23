@@ -61,12 +61,22 @@ static BOOL checkSuspeciousFiles()
     return NO;
 }
 
+static BOOL canWriteSystemFile()
+{
+    NSString *jailBreakText = @"Developer Insider";
+    BOOL ok = [jailBreakText writeToFile:@"jailBreakText.txt" atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    if(ok){
+        return YES;
+    }
+    return NO;
+}
+
 // Example method
 // See // https://reactnative.dev/docs/native-modules-ios
 RCT_EXPORT_METHOD(checkRootJail:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
-    if(TARGET_IPHONE_SIMULATOR || hasCydiaInstalled() || checkSuspeciousApps() || checkSuspeciousFiles()){
+    if(TARGET_IPHONE_SIMULATOR || hasCydiaInstalled() || checkSuspeciousApps() || checkSuspeciousFiles() || canWriteSystemFile()){
         resolve(@YES);
     } else {
         resolve(@NO);
