@@ -66,19 +66,12 @@ static BOOL checkSuspeciousFiles()
 RCT_EXPORT_METHOD(checkRootJail:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 {
-    if(TARGET_IPHONE_SIMULATOR){
-        resolve(@YES);
-    } else if(hasCydiaInstalled()) {
-        resolve(@YES);
-    } else if(checkSuspeciousApps()) {
-        resolve(@YES);
-    } else if(checkSuspeciousFiles()){
+    if(TARGET_IPHONE_SIMULATOR || hasCydiaInstalled() || checkSuspeciousApps() || checkSuspeciousFiles()){
         resolve(@YES);
     } else {
         resolve(@NO);
     }
 }
-
 
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED
