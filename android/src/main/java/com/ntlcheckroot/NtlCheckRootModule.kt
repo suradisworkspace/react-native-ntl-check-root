@@ -8,14 +8,17 @@ import com.scottyab.rootbeer.RootBeer
 class NtlCheckRootModule internal constructor(context: ReactApplicationContext) :
   NtlCheckRootSpec(context) {
 
+  init {
+    instance = this
+  }
+
   override fun getName(): String {
     return NAME
   }
 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
-    var reactContext = ReactApplicationContext()
-    var rootBeer = RootBeer(reactContext)
+    var rootBeer = RootBeer(instance.context)
     promise.resolve(rootBeer.isRooted())
   }
 
