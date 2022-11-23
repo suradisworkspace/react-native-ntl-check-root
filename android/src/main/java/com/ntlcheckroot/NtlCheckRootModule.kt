@@ -3,7 +3,7 @@ package com.ntlcheckroot
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
-import rootbeer.RootBeer
+import com.scottyab.RootBeer
 
 class NtlCheckRootModule internal constructor(context: ReactApplicationContext) :
   NtlCheckRootSpec(context) {
