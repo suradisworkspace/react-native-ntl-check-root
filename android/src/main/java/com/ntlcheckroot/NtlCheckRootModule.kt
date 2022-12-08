@@ -17,28 +17,29 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
     val rootBeer = RootBeer(reactApplicationContext)
-    val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) || 
-      Build.DEVICE.contains("generic", ignoreCase = true)
-    var isSuspicious = false
-    val pm = reactApplicationContext.getPackageManager()
-    val packages = pm.getInstalledPackages(0)
+    // val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) || 
+    //   Build.DEVICE.contains("generic", ignoreCase = true)
+    // var isSuspicious = false
+    // val pm = reactApplicationContext.getPackageManager()
+    // val packages = pm.getInstalledPackages(0)
 
-    for (packageInfo in packages) {
-      val appInfo = packageInfo.applicationInfo
-      val suspiciousPaths = SUSPECT_LIBRARYS.map {
-        File(appInfo.nativeLibraryDir + it)
-      }
+    // for (packageInfo in packages) {
+    //   val appInfo = packageInfo.applicationInfo
+    //   val suspiciousPaths = SUSPECT_LIBRARYS.map {
+    //     File(appInfo.nativeLibraryDir + it)
+    //   }
 
-      isSuspicious = suspiciousPaths.any {
-        it.exists()
-      }
+    //   isSuspicious = suspiciousPaths.any {
+    //     it.exists()
+    //   }
 
-      if (isSuspicious) {
-        break
-      }
-    }
+    //   if (isSuspicious) {
+    //     break
+    //   }
+    // }
 
-    promise.resolve(isOnEmulator || rootBeer.isRooted() || isSuspicious)
+    // promise.resolve(isOnEmulator || rootBeer.isRooted() || isSuspicious)
+    promise.resolve(rootBeer.isRooted())
   }
 
   companion object {
