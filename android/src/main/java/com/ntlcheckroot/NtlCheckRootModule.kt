@@ -17,8 +17,8 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
     val rootBeer = RootBeer(reactApplicationContext)
-    // val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) || 
-    //   Build.DEVICE.contains("generic", ignoreCase = true)
+    val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) || 
+      Build.DEVICE.contains("generic", ignoreCase = true)
     // var isSuspicious = false
     // val pm = reactApplicationContext.getPackageManager()
     // val packages = pm.getInstalledPackages(0)
@@ -39,7 +39,7 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
     // }
 
     // promise.resolve(isOnEmulator || rootBeer.isRooted() || isSuspicious)
-    promise.resolve(rootBeer.isRooted())
+    promise.resolve(isOnEmulator || rootBeer.isRooted())
   }
 
   companion object {
