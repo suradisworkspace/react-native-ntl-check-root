@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
 import com.scottyab.rootbeer.RootBeer
+import kimchangyoun.rootbeer.RootBeer as RootBeerFresh
 import java.io.File
 
 class NtlCheckRootModule internal constructor(context: ReactApplicationContext) :
@@ -17,6 +18,7 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
     val rootBeer = RootBeer(reactApplicationContext)
+    val rootBeerFresh = RootBeerFresh(reactApplicationContext)
     val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) || 
       Build.DEVICE.contains("generic", ignoreCase = true)
     // var isSuspicious = false
@@ -38,8 +40,9 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
     //   }
     // }
 
-    // promise.resolve(isOnEmulator || rootBeer.isRooted() || isSuspicious)
-    promise.resolve(isOnEmulator || rootBeer.isRooted())
+    val isRooted = isOnEmulator || rootBeer.isRooted() || rootBeerFresh.isRootedWithoutBusyBoxCheck()
+    // val isRooted = isOnEmulator || rootBeer.isRooted() || rootBeerFresh.isRootedWithoutBusyBoxCheck() || isSuspicious
+    promise.resolve(isRooted)
   }
 
   companion object {
