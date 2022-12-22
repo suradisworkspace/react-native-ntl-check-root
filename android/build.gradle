@@ -149,7 +149,6 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 // From node_modules
   implementation 'com.scottyab:rootbeer-lib:0.1.0'
-  implementation 'kimchangyoun:rootbeerFresh-lib:0.0.10'
 }
 
 if (isNewArchitectureEnabled()) {
