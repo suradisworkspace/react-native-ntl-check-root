@@ -38,8 +38,9 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
     //   }
     // }
 
-    // promise.resolve(isOnEmulator || rootBeer.isRooted() || isSuspicious)
-    promise.resolve(isOnEmulator || rootBeer.isRooted())
+    val isRooted = isOnEmulator || rootBeer.isRooted()
+    // val isRooted = isOnEmulator || rootBeer.isRooted() || isSuspicious
+    promise.resolve(isRooted)
   }
 
   companion object {
