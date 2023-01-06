@@ -7,7 +7,7 @@ export default function App() {
   const [checkRootRes, setCheckRootRes] = React.useState<boolean | undefined>();
 
   React.useEffect(() => {
-    init();
+    init2();
   }, []);
 
   const init = async () => {
@@ -16,9 +16,14 @@ export default function App() {
     Alert.alert('jail res', `${jailRes}`);
   };
 
+  const init2 = async () => {
+    const jailRes = await checkRootJail();
+    console.log('RESULT', jailRes);
+  };
+
   return (
     <View style={styles.container}>
-      <Text>checkRootRes: {checkRootRes}</Text>
+      <Text>{`checkRootRes: ${checkRootRes}`}</Text>
     </View>
   );
 }

@@ -6,6 +6,8 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
 import com.scottyab.rootbeer.RootBeer
 import java.io.File
+import magiskdetector.IDetector
+import magiskdetector.MagiskCheck
 
 class NtlCheckRootModule internal constructor(context: ReactApplicationContext) :
   NtlCheckRootSpec(context) {
@@ -17,8 +19,15 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
     val rootBeer = RootBeer(reactApplicationContext)
-    val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) || 
+    val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) ||
       Build.DEVICE.contains("generic", ignoreCase = true)
+
+    var hasMagisk = ""
+    val magiskCheck = MagiskCheck(reactApplicationContext)
+    val detail = mutableListOf<Pair<String, IDetector.Result>>()
+    val result = magiskCheck.run(null, detail)
+    hasMagisk = result.name
+
     // var isSuspicious = false
     // val pm = reactApplicationContext.getPackageManager()
     // val packages = pm.getInstalledPackages(0)
@@ -40,7 +49,8 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
 
     val isRooted = isOnEmulator || rootBeer.isRooted()
     // val isRooted = isOnEmulator || rootBeer.isRooted() || isSuspicious
-    promise.resolve(isRooted)
+    //promise.resolve(isRooted)
+    promise.resolve(hasMagisk)
   }
 
   companion object {
