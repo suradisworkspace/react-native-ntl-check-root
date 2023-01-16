@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text, Alert } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { checkRootJail } from 'react-native-ntl-check-root';
 
 export default function App() {
@@ -13,12 +13,12 @@ export default function App() {
   const init = async () => {
     const jailRes = await checkRootJail();
     setCheckRootRes(jailRes);
-    Alert.alert('jail res', `${jailRes}`);
+    // Alert.alert('jail res', `${jailRes}`);
   };
 
   return (
     <View style={styles.container}>
-      <Text>checkRootRes: {checkRootRes}</Text>
+      <Text>{`checkRootRes: ${checkRootRes}`}</Text>
     </View>
   );
 }
