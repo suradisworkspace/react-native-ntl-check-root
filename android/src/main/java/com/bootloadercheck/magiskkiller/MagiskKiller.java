@@ -1,4 +1,4 @@
-package top.canyie.magiskkiller;
+package com.bootloadercheck.magiskkiller;
 
 import android.util.Log;
 import java.util.List;
@@ -9,27 +9,14 @@ import java.util.List;
 public class MagiskKiller {
     public static final String TAG = "MagiskKiller";
 
-    /** Found some one tracing us (perhaps MagiskHide) */
-    public static final int FOUND_TRACER = 1 << 0;
-
     /** Bootloader is unlocked */
     public static final int FOUND_BOOTLOADER_UNLOCKED = 1 << 1;
 
     /** Device is running a self-signed ROM */
     public static final int FOUND_BOOTLOADER_SELF_SIGNED = 1 << 2;
 
-    /** Riru installed */
-    public static final int FOUND_RIRU = 1 << 3;
-
     /** Some system properties are modified by resetprop (a tool provided by Magisk) */
     public static final int FOUND_RESETPROP = 1 << 4;
-
-    /** Found active `magisk su` session (the detection method used by HSBC app) */
-    public static final int FOUND_MAGISK_PTS = 1 << 5;
-
-    public static void loadNativeLibrary() {
-        System.loadLibrary("safetychecker");
-    }
 
     public static int detectBootloaderProperties() {
         int result = 0;

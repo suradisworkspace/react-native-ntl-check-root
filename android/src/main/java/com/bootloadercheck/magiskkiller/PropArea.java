@@ -1,4 +1,4 @@
-package top.canyie.magiskkiller;
+package com.bootloadercheck.magiskkiller;
 
 import android.util.Log;
 
@@ -52,7 +52,7 @@ public class PropArea {
         int magic = data.getInt();
         if (magic != PROP_AREA_MAGIC) throw new IllegalArgumentException("Bad file magic: " + magic);
         int version = data.getInt();
-        if (version != PROP_AREA_VERSION) throw new IllegalArgumentException("Bad area versin: " + version);
+        if (version != PROP_AREA_VERSION) throw new IllegalArgumentException("Bad area version: " + version);
         data.position(data.position() + 28); // reserved
     }
 
