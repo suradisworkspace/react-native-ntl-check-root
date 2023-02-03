@@ -1,6 +1,6 @@
 
 #ifdef RCT_NEW_ARCH_ENABLED
-#import "RNNtlCheckRootSpec.h"
+#import "NtlCheckRootSpec.h"
 
 @interface NtlCheckRoot : NSObject <NativeNtlCheckRootSpec>
 #else
