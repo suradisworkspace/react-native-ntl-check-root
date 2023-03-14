@@ -66,8 +66,7 @@ static BOOL checkSuspeciousFiles()
                                   @"/etc/ssh/sshd_config",
                                   @"/bin/bash",
                                   @"/bin/sh",
-                                  @"/Library/MobileSubstrate/MobileSubstrate.dylib",
-                                  @"/Library/LiveClock/MobileSubstrate.dylib" ];
+                                  @"/Library/MobileSubstrate/MobileSubstrate.dylib" ];
     for(NSString * filePath in suspeciousFiles) {
         if([[NSFileManager defaultManager] fileExistsAtPath: filePath]){
             return YES;
