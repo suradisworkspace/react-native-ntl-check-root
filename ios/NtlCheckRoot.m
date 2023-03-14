@@ -27,6 +27,8 @@ static BOOL checkSuspeciousApps()
                                  @"/Applications/RockApp.app",
                                  @"/Applications/SBSettings.app",
                                  @"/Applications/WinterBoard.app" ];
+
+                                 
     for(NSString * appPath in suspiciousApps) {
         if([[NSFileManager defaultManager] fileExistsAtPath: appPath]){
             return YES;
@@ -49,10 +51,23 @@ static BOOL checkSuspeciousFiles()
                                   @"/System/Library/LaunchDaemons/com.saurik.Cydia.Startup.plist",
                                   @"/usr/bin/sshd",
                                   @"/usr/libexec/sftp-server",
+                                  @"/usr/libexec/ssh-keysign",
                                   @"/usr/sbin/sshd",
+                                  @"/var/lib/cydia",
+                                  @"/usr/sbin/frida-server",
+                                  @"/usr/bin/cycript",
+                                  @"/usr/local/bin/cycript",
+                                  @"/usr/lib/libcycript.dylib",
+                                  @"/var/cache/apt",
+                                  @"/var/lib/apt",
+                                  @"/var/tmp/cydia.log",
+                                  @"/var/log/syslog",
                                   @"/etc/apt",
+                                  @"/etc/ssh/sshd_config",
                                   @"/bin/bash",
-                                  @"/Library/MobileSubstrate/MobileSubstrate.dylib" ];
+                                  @"/bin/sh",
+                                  @"/Library/MobileSubstrate/MobileSubstrate.dylib",
+                                  @"/Library/LiveClock/MobileSubstrate.dylib" ];
     for(NSString * filePath in suspeciousFiles) {
         if([[NSFileManager defaultManager] fileExistsAtPath: filePath]){
             return YES;
