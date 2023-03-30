@@ -6,5 +6,5 @@ import com.facebook.react.bridge.Promise
 abstract class NtlCheckRootSpec internal constructor(context: ReactApplicationContext) :
   NativeNtlCheckRootSpec(context) {
 
-    abstract fun checkRootJail(promise: Promise)
+    abstract override fun checkRootJail(promise: Promise)
 }
