@@ -17,12 +17,16 @@ class NtlCheckRootModule internal constructor(context: ReactApplicationContext) 
   @ReactMethod
   override fun checkRootJail(promise: Promise) {
     val rootBeer = RootBeer(reactApplicationContext)
-    val bootloaderCheck = BootloaderCheck()
     val isOnEmulator = Build.FINGERPRINT.contains("generic", ignoreCase = true) ||
       Build.DEVICE.contains("generic", ignoreCase = true)
-
-    val isRooted = rootBeer.isRooted() || bootloaderCheck.isBootloaderUnlocked() || isOnEmulator
+    val isRooted = rootBeer.isRooted() || isOnEmulator
     promise.resolve(isRooted)
+  }
+
+  @ReactMethod
+  override fun checkBootloaderUnlocked(promise: Promise) {
+    val bootloaderCheck = BootloaderCheck()
+    promise.resolve(bootloaderCheck.isBootloaderUnlocked())
   }
 
   companion object {

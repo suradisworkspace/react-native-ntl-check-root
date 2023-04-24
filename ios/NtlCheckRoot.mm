@@ -97,6 +97,13 @@ RCT_EXPORT_METHOD(checkRootJail:(RCTPromiseResolveBlock)resolve
     }
 }
 
+RCT_EXPORT_METHOD(checkBootloaderUnlocked:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+{
+    // Always false, because bootloader is for Android
+    resolve(@NO);
+}
+
 // Don't compile this code when we build for the old architecture.
 #ifdef RCT_NEW_ARCH_ENABLED
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:

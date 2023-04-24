@@ -27,3 +27,7 @@ const NtlCheckRoot = NtlCheckRootModule
 export function checkRootJail(): Promise<boolean> {
   return NtlCheckRoot.checkRootJail();
 }
+
+export function checkBootloaderUnlocked(): Promise<boolean> {
+  return NtlCheckRoot.checkBootloaderUnlocked();
+}

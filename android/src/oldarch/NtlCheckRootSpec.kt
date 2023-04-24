@@ -6,6 +6,6 @@ import com.facebook.react.bridge.Promise
 
 abstract class NtlCheckRootSpec internal constructor(context: ReactApplicationContext) :
   ReactContextBaseJavaModule(context) {
-
     abstract fun checkRootJail(promise: Promise)
+    abstract fun checkBootloaderUnlocked(promise: Promise)
 }
